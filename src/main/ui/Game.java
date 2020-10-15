@@ -9,6 +9,8 @@ import java.util.Scanner;
 //Code reference fo any scanner methods: TellerApp and https://www.javatpoint.com/Scanner-class
 /**
  * Represents the game of King's Row
+ * Displaying the game for the player and allowing the
+ * player to input into the console to play the game.
  */
 public class Game {
 
@@ -20,6 +22,7 @@ public class Game {
     private Scanner input;
     private int round;
 
+    //EFFECT: Sets up the game with the needed items
     public Game() {
         deck = new Deck(DECK_QUANTITY);
         deck.shuffle();
@@ -33,6 +36,9 @@ public class Game {
         round = 0;
     }
 
+    //EFFECT: in charge of running the game and determines
+    // whether the player wants to continue playing or if
+    // the player has won or lost the game
     public void play() {
         boolean play = playOrQuit();
         while (play) {
@@ -49,7 +55,7 @@ public class Game {
             } else if (answer.equals("q")) {
                 break;
             } else if (!deck.isEmpty()) {
-                System.out.println("3 cards were added to your hand because you couldn't play any cards.");
+                System.out.println("\n3 cards were added to your hand because you couldn't play any cards.");
                 hand.removeTopThree(deck);
             } else {
                 gameOver();
@@ -58,31 +64,35 @@ public class Game {
         }
     }
 
-
+    //EFFECT: helper method to print statements for
+    // when the game is over and the player has lost
     public void gameOver() {
         System.out.println("There are no more cards in main deck to be given and you have no more cards");
         System.out.println("that can be discarded...\nGame Over :(");
     }
 
+    //EFFECT: helper method to print statement for the
+    // player asking if they have the certain cards to play
     public void question() {
         System.out.println("Do you have at least 2 cards with a alternating colour and ");
         System.out.println("consecutive rank that can go after the last card in either Deck 1 or 2?");
         System.out.println("Please answer 'yes' or 'no'. If you would like to quit, answer 'q'.");
     }
 
-
+    //EFFECT: returns true if the player wants to play
+    // Otherwise returns false
     public boolean playOrQuit() {
-        System.out.println("Play --> p");
-        System.out.println("Quit --> q");
+        System.out.println("Play -> p");
+        System.out.println("To quit, type anything but 'p'.");
         String play = input.next();
         play  = play.toLowerCase();
-        if (play.equals("p")) {
-            return true;
-        }
-        return false;
+        return play.equals("p");
     }
 
     //Code reference for array print statements: https://stackoverflow.com/questions/9265719/print-arraylist
+    //EFFECT: helper method that prints out the layout of the game for the player
+    // to see what round of the game it is, the two decks
+    // with the kings and their hand of cards
     public void layout() {
         round = round + 1;
         System.out.println("Round: " + round);
@@ -96,6 +106,9 @@ public class Game {
     }
 
 
+    //EFFECT: helper method for when the player says yes to having cards to play
+    // and tells the user if the cards they entered meet the requirements of the game,
+    // if it does not, then it allows the player to try again
     public void yesPlaying() {
         Deck putInTo = addingToWhichDeck();
         Deck getRidOf;
@@ -116,12 +129,15 @@ public class Game {
         }
     }
 
-
+    //EFFECT: returns either startWithRed or startWithBlack
+    // from what the player chooses to put their cards into.
+    // If the player answers neither of the options given, it allows the
+    // player to enter their answer again
     public Deck addingToWhichDeck() {
         Deck putInTo = new Deck();
         boolean notCorrectChoice = true;
         while (notCorrectChoice) {
-            System.out.println("For which Deck? 1 or 2?");
+            System.out.println("For which Row? 1 or 2?");
             String whichDeck = input.next();
             whichDeck = whichDeck.toLowerCase();
             if (whichDeck.equals("1")) {
@@ -137,7 +153,10 @@ public class Game {
         return putInTo;
     }
 
-
+    //EFFECT: returns a deck containing the cards the user has chosen from
+    // their hand. However, if the deck contains less than 2 cards, the user
+    // is prompted to enter more cards to add to the deck until the deck has
+    // 2 or more cards
     public Deck enteringCards() {
         Card card = userInputCard();
         Deck getRidOf = new Deck();
@@ -160,7 +179,10 @@ public class Game {
     }
 
 
-
+    //EFFECT: returns a cards that the user inputs
+    // If that card is not in their hand, it allows the
+    // player to enter a card again until they have entered
+    // a card that is in their hand
     private Card userInputCard() {
         String colour = inputColour();
         int rank = inputRank();
@@ -179,6 +201,9 @@ public class Game {
         return newCard;
     }
 
+    //EFFECT: returns either "r" or "b" to represent the colour of the card
+    // the player inputs. If the user inputs anything else, then the game
+    // allows the user to enter again until they have entered correctly "r" or "b"
     private String inputColour() {
         System.out.println("Enter colour: ");
         String colour = input.next();
@@ -195,6 +220,10 @@ public class Game {
         return colour;
     }
 
+    //EFFECT: returns an integer representing the rank of the card
+    // the player inputs. If the player inputs a rank that is not in range
+    // of 1 to 12, then it allows the player to enter again until they
+    // input an int within the range
     private int inputRank() {
         System.out.println("Enter rank: ");
         int rank = input.nextInt();

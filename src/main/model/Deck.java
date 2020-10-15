@@ -28,24 +28,29 @@ public class Deck {
         }
     }
 
+    //EFFECT: returns the size of the deck
     public int getSize() {
         return deck.size();
     }
 
+    //EFFECT: returns true if the deck is empty
     public boolean isEmpty() {
         return deck.isEmpty();
     }
 
+    //EFFECT: returns the card that in the specified index
     public Card getCard(int index) {
         return deck.get(index);
     }
 
+    //MODIFIES: this
+    //EFFECT: adds a card to the end of the deck
     public void addCard(Card card) {
         deck.add(card);
     }
 
     //EFFECT: returns true if the deck contains the given card
-    //otherwise, returns false
+    //Otherwise returns false
     public boolean containsCard(Card c) {
         for (Card card : deck) {
             if (c.sameCard(card)) {
@@ -57,7 +62,7 @@ public class Deck {
 
     //Code reference: https://www.journaldev.com/32661/shuffle-array-java
     //MODIFIES: this
-    //EFFECT: shuffles the deck
+    //EFFECT: shuffles the deck in random order
     public void shuffle() {
         Collections.shuffle(deck);
     }
@@ -82,7 +87,6 @@ public class Deck {
                 }
             }
         }
-
     }
 
     //REQUIRES: card must be in the deck
@@ -96,7 +100,7 @@ public class Deck {
     //MODIFIES: this, cards
     //EFFECT: removes 3 cards from the otherDeck and adds it to this deck
     // but if there is less than 3 cards in otherDeck, all cards are removed
-    //from the otherDeck and added to this deck
+    // from the otherDeck and added to this deck
     public void removeTopThree(Deck otherDeck) {
         if (otherDeck.getSize() >= 3) {
             for (int i = 0; i < 3; i++) {
@@ -115,18 +119,18 @@ public class Deck {
     //REQUIRES: this deck needs to contain at least DEALING_AMOUNT cards
     //MODIFIES: This
     //EFFECT: removes the amount of cards needed to be dealt from
-    // this deck and returns those cards as a deck
+    // this deck and returns those cards as a new deck
     public Deck dealHand() {
-        Deck cards = new Deck();
+        Deck hand = new Deck();
         for (int i = 0; i < DEALING_AMOUNT; i++) {
-            cards.addCard(deck.get(deck.size() - 1));
+            hand.addCard(deck.get(deck.size() - 1));
             deck.remove(deck.get(deck.size() - 1));
         }
-        return cards;
+        return hand;
     }
 
     //EFFECT: returns true if the colours of the cards in the deck are alternating
-    //otherwise, returns false
+    // Otherwise returns false
     public boolean isAlternatingColour() {
         for (int i = 0; i < deck.size() - 1; i++) {
             String colour = deck.get(i).getColour();
@@ -136,11 +140,10 @@ public class Deck {
             }
         }
         return true;
-
     }
 
     //EFFECT: returns true if the ranks of the cards in the deck is
-    // in consecutive and descending order, otherwise, returns false
+    // in consecutive and descending order, otherwise returns false
     public boolean isDescendingRank() {
         for (int i = 0; i < deck.size() - 1; i++) {
             int rank = deck.get(i).getRank();
