@@ -117,8 +117,8 @@ class TestDeck {
         Deck deck1 = new Deck();
         deck.addCard(card1);
         deck1.addCard(card1);
-        assertTrue(deck.equals(deck1));
-        assertTrue(deck.hashCode() == deck1.hashCode());
+        assertEquals(deck1, deck);
+        assertEquals(deck1.hashCode(), deck.hashCode());
     }
 
     @Test

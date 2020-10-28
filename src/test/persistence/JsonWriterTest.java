@@ -10,7 +10,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 public class JsonWriterTest {
@@ -61,8 +60,8 @@ public class JsonWriterTest {
             decks = reader.read();
             List<Deck> deck = decks.getDecksToList();
             assertEquals(2, deck.size());
-            assertTrue(red.equals(deck.get(0)));
-            assertTrue(black.equals(deck.get(1)));
+            assertEquals(deck.get(0), red);
+            assertEquals(deck.get(1), black);
         } catch (IOException e) {
             fail("Exception not expected");
         }

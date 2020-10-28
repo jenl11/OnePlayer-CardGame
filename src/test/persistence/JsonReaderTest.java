@@ -46,8 +46,8 @@ public class JsonReaderTest {
             GameDecks decks = reader.read();
             List<Deck> deck = decks.getDecksToList();
             assertEquals(2, deck.size());
-            assertTrue(red.equals(deck.get(0)));
-            assertTrue(black.equals(deck.get(1)));
+            assertEquals(deck.get(0), red);
+            assertEquals(deck.get(1), black);
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
