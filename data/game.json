@@ -1,0 +1,112 @@
+{"Decks": [
+    {"cards": [
+        {
+            "colour": "b",
+            "rank": 4
+        },
+        {
+            "colour": "b",
+            "rank": 7
+        },
+        {
+            "colour": "b",
+            "rank": 1
+        },
+        {
+            "colour": "r",
+            "rank": 11
+        },
+        {
+            "colour": "b",
+            "rank": 12
+        }
+    ]},
+    {"cards": [
+        {
+            "colour": "b",
+            "rank": 10
+        },
+        {
+            "colour": "r",
+            "rank": 9
+        },
+        {
+            "colour": "b",
+            "rank": 8
+        },
+        {
+            "colour": "r",
+            "rank": 7
+        },
+        {
+            "colour": "r",
+            "rank": 6
+        },
+        {
+            "colour": "b",
+            "rank": 6
+        },
+        {
+            "colour": "r",
+            "rank": 5
+        },
+        {
+            "colour": "b",
+            "rank": 5
+        },
+        {
+            "colour": "r",
+            "rank": 4
+        },
+        {
+            "colour": "r",
+            "rank": 3
+        },
+        {
+            "colour": "b",
+            "rank": 3
+        },
+        {
+            "colour": "b",
+            "rank": 2
+        },
+        {
+            "colour": "r",
+            "rank": 2
+        },
+        {
+            "colour": "r",
+            "rank": 1
+        }
+    ]},
+    {"cards": [{
+        "colour": "r",
+        "rank": 13
+    }]},
+    {"cards": [
+        {
+            "colour": "b",
+            "rank": 13
+        },
+        {
+            "colour": "r",
+            "rank": 12
+        },
+        {
+            "colour": "b",
+            "rank": 11
+        },
+        {
+            "colour": "r",
+            "rank": 10
+        },
+        {
+            "colour": "b",
+            "rank": 9
+        },
+        {
+            "colour": "r",
+            "rank": 8
+        }
+    ]}
+]}

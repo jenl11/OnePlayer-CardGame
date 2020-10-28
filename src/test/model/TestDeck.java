@@ -85,6 +85,43 @@ class TestDeck {
     }
 
     @Test
+    public void testNotEquals() {
+        Card card1 = new Card("r", 1);
+        Card card2 = new Card("b", 2);
+        Deck deck1 = new Deck();
+        deck.addCard(card1);
+        deck1.addCard(card2);
+        assertFalse(deck.equals(deck1));
+    }
+
+    @Test
+    public void testNotEqualsDifferentClass() {
+        Card card1 = new Card("r", 1);
+        assertFalse(deck.equals(card1));
+    }
+
+    @Test
+    public void testSameHashCode() {
+        Card card1 = new Card("r", 1);
+        Card card2 = new Card("b", 2);
+        Deck deck1 = new Deck();
+        deck.addCard(card1);
+        deck1.addCard(card2);
+        assertFalse(deck.equals(deck1));
+        assertTrue(deck.hashCode() != deck1.hashCode());
+    }
+
+    @Test
+    public void testDifferentHashCode() {
+        Card card1 = new Card("r", 1);
+        Deck deck1 = new Deck();
+        deck.addCard(card1);
+        deck1.addCard(card1);
+        assertTrue(deck.equals(deck1));
+        assertTrue(deck.hashCode() == deck1.hashCode());
+    }
+
+    @Test
     public void testAddNothing() {
         Deck otherDeck = new Deck();
         deck.addDeck(otherDeck);

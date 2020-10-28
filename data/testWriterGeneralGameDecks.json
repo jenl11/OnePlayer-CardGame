@@ -1,0 +1,10 @@
+{"Decks": [
+    {"cards": [{
+        "colour": "r",
+        "rank": 13
+    }]},
+    {"cards": [{
+        "colour": "b",
+        "rank": 13
+    }]}
+]}

@@ -2,7 +2,12 @@ package ui;
 
 import model.Card;
 import model.Deck;
+import model.GameDecks;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -13,7 +18,7 @@ import java.util.Scanner;
  * player to input into the console to play the game.
  */
 public class Game {
-
+    private static final String JSON_STORE = "./data/game.json";
     private static final int DECK_QUANTITY = 24;
     private Deck deck;
     private Deck hand;
@@ -21,6 +26,8 @@ public class Game {
     private Deck startWithBlack;
     private Scanner input;
     private int round;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     //EFFECT: Sets up the game with the needed items
     public Game() {
@@ -34,11 +41,13 @@ public class Game {
         startWithBlack.addCard(new Card("b", 13));
         input = new Scanner(System.in);
         round = 0;
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     //EFFECT: in charge of running the game and determines
-    // whether the player wants to continue playing or if
-    // the player has won or lost the game
+    // whether the player wants to continue playing, save the game, quit the game
+    // or if the player has won or lost the game
     public void play() {
         boolean play = playOrQuit();
         while (play) {
@@ -49,10 +58,11 @@ public class Game {
             layout();
             question();
             String answer = input.next();
-            answer = answer.toLowerCase();
-            if (answer.equals("yes")) {
+            if (answer.toLowerCase().equals("yes")) {
                 yesPlaying();
-            } else if (answer.equals("q")) {
+            } else if (answer.toLowerCase().equals("s")) {
+                saveGame();
+            } else if (answer.toLowerCase().equals("q")) {
                 break;
             } else if (!deck.isEmpty()) {
                 System.out.println("\n3 cards were added to your hand because you couldn't play any cards.");
@@ -66,34 +76,41 @@ public class Game {
 
     //EFFECT: helper method to print statements for
     // when the game is over and the player has lost
-    public void gameOver() {
+    private void gameOver() {
         System.out.println("There are no more cards in main deck to be given and you have no more cards");
         System.out.println("that can be discarded...\nGame Over :(");
     }
 
     //EFFECT: helper method to print statement for the
     // player asking if they have the certain cards to play
-    public void question() {
+    private void question() {
         System.out.println("Do you have at least 2 cards with a alternating colour and ");
         System.out.println("consecutive rank that can go after the last card in either Deck 1 or 2?");
-        System.out.println("Please answer 'yes' or 'no'. If you would like to quit, answer 'q'.");
+        System.out.println("Please answer 'yes' or 'no'");
+        System.out.println("If you want to **save** the game, answer 's'");
+        System.out.println("If you want to **quit** the game, answer 'q'");
+
     }
 
-    //EFFECT: returns true if the player wants to play
+    //EFFECT: returns true if the player wants to play or they want to load the game from a previous round
     // Otherwise returns false
-    public boolean playOrQuit() {
+    private boolean playOrQuit() {
         System.out.println("Play -> p");
-        System.out.println("To quit, type anything but 'p'.");
+        System.out.println("load -> l");
+        System.out.println("Quit -> q");
         String play = input.next();
         play  = play.toLowerCase();
-        return play.equals("p");
+        if (play.equals("l")) {
+            loadGame();
+        }
+        return play.equals("p") || play.equals("l");
     }
 
     //Code reference for array print statements: https://stackoverflow.com/questions/9265719/print-arraylist
     //EFFECT: helper method that prints out the layout of the game for the player
     // to see what round of the game it is, the two decks
     // with the kings and their hand of cards
-    public void layout() {
+    private void layout() {
         round = round + 1;
         System.out.println("Round: " + round);
         System.out.println("Row 1: ");
@@ -109,7 +126,7 @@ public class Game {
     //EFFECT: helper method for when the player says yes to having cards to play
     // and tells the user if the cards they entered meet the requirements of the game,
     // if it does not, then it allows the player to try again
-    public void yesPlaying() {
+    private void yesPlaying() {
         Deck putInTo = addingToWhichDeck();
         Deck getRidOf;
         boolean notEligibleCard = true;
@@ -133,7 +150,7 @@ public class Game {
     // from what the player chooses to put their cards into.
     // If the player answers neither of the options given, it allows the
     // player to enter their answer again
-    public Deck addingToWhichDeck() {
+    private Deck addingToWhichDeck() {
         Deck putInTo = new Deck();
         boolean notCorrectChoice = true;
         while (notCorrectChoice) {
@@ -157,7 +174,7 @@ public class Game {
     // their hand. However, if the deck contains less than 2 cards, the user
     // is prompted to enter more cards to add to the deck until the deck has
     // 2 or more cards
-    public Deck enteringCards() {
+    private Deck enteringCards() {
         Card card = userInputCard();
         Deck getRidOf = new Deck();
         getRidOf.addCard(card);
@@ -239,4 +256,30 @@ public class Game {
         return rank;
     }
 
+    //EFFECTS: saves the game to the game.json file in data
+    private void saveGame() {
+        try {
+            jsonWriter.open();
+            GameDecks decks = new GameDecks(deck, hand, startWithRed, startWithBlack);
+            jsonWriter.write(decks);
+            jsonWriter.close();
+            System.out.println("Saved game to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    //EFFECTS: loads the game using the decks stored in game.json file
+    private void loadGame() {
+        try {
+            GameDecks decks = jsonReader.read();
+            deck = decks.getDeck(0);
+            hand = decks.getDeck(1);
+            startWithRed = decks.getDeck(2);
+            startWithBlack = decks.getDeck(3);
+            System.out.println("Loaded game from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 }

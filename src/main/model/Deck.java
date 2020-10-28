@@ -1,13 +1,18 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents a list that consist of cards
  */
-public class Deck {
+public class Deck implements Writable {
 
     public static final int DEALING_AMOUNT = 7;
     private List<Card> deck;
@@ -183,8 +188,44 @@ public class Deck {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Deck deck1 = (Deck) o;
+        return Objects.equals(deck, deck1.deck);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(deck);
+    }
+
     //EFFECT: returns an array list of the deck
     public Object[] toArray() {
         return deck.toArray();
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("cards", cardsToJson());
+        return json;
+    }
+
+
+    // EFFECTS: returns cards in this deck as a JSON array
+    private JSONArray cardsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Card t : deck) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }

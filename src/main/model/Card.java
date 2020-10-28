@@ -1,9 +1,15 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.nio.file.Watchable;
+import java.util.Objects;
+
 /**
  * Represents a playing card with a colour of the card and the rank
  */
-public class Card {
+public class Card implements Writable {
 
     private String colour;
     private int rank;
@@ -28,9 +34,35 @@ public class Card {
         return colour.equals(otherCard.getColour()) && rank == otherCard.getRank();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Card card = (Card) o;
+        return rank == card.rank && Objects.equals(colour, card.colour);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(colour, rank);
+    }
+
     //Code reference: https://www.javatpoint.com/understanding-toString()-method
     //EFFECT: returns the string representation of the card
     public String toString() {
         return "<" + getColour() + "," + getRank() + ">";
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("colour",colour);
+        json.put("rank", rank);
+        return json;
     }
 }

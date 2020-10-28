@@ -29,3 +29,8 @@ alternating colour and consecutive rank
 - As a user, I want to have a choice to play or quit the game
 - As a user, I want to be able to choose which deck I want to put my cards into
 - As a user, I want to be able to tell the game I do or don't have cards to play that round
+
+Data persistence:
+- as a user, I want to be able to save the state of my game to a file
+- as a user, I want to be able to load a saved game from file and continue playing from that saved game
+- as a user, I want the option to load the saved game before the game starts

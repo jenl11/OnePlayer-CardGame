@@ -1,6 +1,5 @@
 package model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,6 +20,13 @@ public class TestCard {
         Card card2 = new Card("r", 1);
 
         assertTrue(card1.sameCard(card2));
+    }
+
+    @Test
+    public void testNotEqualsDifferentClass() {
+        Card card1 = new Card("r", 1);
+        Deck deck = new Deck();
+        assertFalse(card1.equals(deck));
     }
 
     @Test
