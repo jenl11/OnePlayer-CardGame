@@ -23,6 +23,14 @@ public class TestCard {
     }
 
     @Test
+    public void testNotSameCard() {
+        Card card1 = new Card("r", 1);
+        Card card2 = new Card("b", 3);
+
+        assertFalse(card1.sameCard(card2));
+    }
+
+    @Test
     public void testNotEqualsDifferentClass() {
         Card card1 = new Card("r", 1);
         Deck deck = new Deck();
@@ -30,11 +38,19 @@ public class TestCard {
     }
 
     @Test
-    public void testNotSameCard() {
+    public void testSameHashCode() {
         Card card1 = new Card("r", 1);
-        Card card2 = new Card("b", 3);
+        Card card2 = new Card("r", 1);
+        assertEquals(card2, card1);
+        assertEquals(card2.hashCode(), card1.hashCode());
+    }
 
-        assertFalse(card1.sameCard(card2));
+    @Test
+    public void testDifferentHashCode() {
+        Card card1 = new Card("r", 1);
+        Card card2 = new Card("b", 2);
+        assertNotEquals(card1, card2);
+        assertTrue(card1.hashCode() != card2.hashCode());
     }
 
     @Test
