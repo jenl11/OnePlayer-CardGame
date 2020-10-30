@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 //Code reference fo any scanner methods: TellerApp and https://www.javatpoint.com/Scanner-class
+
 /**
  * Represents the game of King's Row
  * Displaying the game for the player and allowing the
@@ -37,7 +38,7 @@ public class Game {
         hand = deck.dealHand();
         startWithRed = new Deck();
         startWithBlack = new Deck();
-        startWithRed.addCard(new Card("r",13));
+        startWithRed.addCard(new Card("r", 13));
         startWithBlack.addCard(new Card("b", 13));
         input = new Scanner(System.in);
         round = 0;
@@ -99,7 +100,7 @@ public class Game {
         System.out.println("load -> l");
         System.out.println("Quit -> q");
         String play = input.next();
-        play  = play.toLowerCase();
+        play = play.toLowerCase();
         if (play.equals("l")) {
             loadGame();
         }
@@ -212,7 +213,7 @@ public class Game {
                 System.out.println("The card entered is not a card in your hand. Try again.");
                 colour = inputColour();
                 rank = inputRank();
-                newCard = new Card(colour,rank);
+                newCard = new Card(colour, rank);
             }
         }
         return newCard;

@@ -31,6 +31,13 @@ public class TestCard {
     }
 
     @Test
+    public void testNotEqualNull() {
+        Card card1 = new Card("r", 1);
+        Card card2 = null;
+        assertFalse(card1.equals(card2));
+    }
+
+    @Test
     public void testNotEqualsDifferentClass() {
         Card card1 = new Card("r", 1);
         Deck deck = new Deck();

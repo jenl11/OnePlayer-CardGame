@@ -61,7 +61,7 @@ public class Card implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("colour",colour);
+        json.put("colour", colour);
         json.put("rank", rank);
         return json;
     }

@@ -66,7 +66,7 @@ public class JsonReader {
             JSONObject nextCard = (JSONObject) o;
             String colour = nextCard.getString("colour");
             int rank = nextCard.getInt("rank");
-            Card card = new Card(colour,rank);
+            Card card = new Card(colour, rank);
             deck.addCard(card);
         }
     }

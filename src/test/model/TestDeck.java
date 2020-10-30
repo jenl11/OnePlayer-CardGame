@@ -111,6 +111,12 @@ class TestDeck {
     }
 
     @Test
+    public void testNotEqualsNull() {
+        Deck deck1 = null;
+        assertFalse(deck.equals(deck1));
+    }
+
+    @Test
     public void testDifferentHashCode() {
         Card card1 = new Card("r", 1);
         Card card2 = new Card("b", 2);
