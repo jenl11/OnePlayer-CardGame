@@ -65,6 +65,12 @@ public class Deck implements Writable {
         return false;
     }
 
+    public void removeAll() {
+        deck.removeAll(deck);
+
+    }
+
+
     //Code reference: https://www.journaldev.com/32661/shuffle-array-java
     //MODIFIES: this
     //EFFECT: shuffles the deck in random order
@@ -187,6 +193,7 @@ public class Deck implements Writable {
             }
         }
     }
+
 
     @Override
     public boolean equals(Object o) {

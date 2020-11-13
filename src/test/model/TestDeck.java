@@ -85,6 +85,17 @@ class TestDeck {
     }
 
     @Test
+    public void testRemoveAll() {
+        Card card1 = new Card("r", 1);
+        Card card2 = new Card("b", 1);
+        deck.addCard(card1);
+        deck.addCard(card2);
+        assertEquals(2, deck.getSize());
+        deck.removeAll();
+        assertEquals(0, deck.getSize());
+    }
+
+    @Test
     public void testEquals() {
         Card card1 = new Card("r", 1);
         Card card2 = new Card("r", 1);

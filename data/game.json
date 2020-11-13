@@ -1,27 +1,23 @@
 {"Decks": [
     {"cards": [
         {
-            "colour": "b",
-            "rank": 4
-        },
-        {
-            "colour": "b",
-            "rank": 7
-        },
-        {
-            "colour": "b",
+            "colour": "r",
             "rank": 1
+        },
+        {
+            "colour": "r",
+            "rank": 5
+        }
+    ]},
+    {"cards": [
+        {
+            "colour": "b",
+            "rank": 12
         },
         {
             "colour": "r",
             "rank": 11
         },
-        {
-            "colour": "b",
-            "rank": 12
-        }
-    ]},
-    {"cards": [
         {
             "colour": "b",
             "rank": 10
@@ -39,23 +35,11 @@
             "rank": 7
         },
         {
-            "colour": "r",
-            "rank": 6
-        },
-        {
             "colour": "b",
             "rank": 6
         },
         {
-            "colour": "r",
-            "rank": 5
-        },
-        {
             "colour": "b",
-            "rank": 5
-        },
-        {
-            "colour": "r",
             "rank": 4
         },
         {
@@ -64,19 +48,7 @@
         },
         {
             "colour": "b",
-            "rank": 3
-        },
-        {
-            "colour": "b",
             "rank": 2
-        },
-        {
-            "colour": "r",
-            "rank": 2
-        },
-        {
-            "colour": "r",
-            "rank": 1
         }
     ]},
     {"cards": [{
@@ -107,6 +79,34 @@
         {
             "colour": "r",
             "rank": 8
+        },
+        {
+            "colour": "b",
+            "rank": 7
+        },
+        {
+            "colour": "r",
+            "rank": 6
+        },
+        {
+            "colour": "b",
+            "rank": 5
+        },
+        {
+            "colour": "r",
+            "rank": 4
+        },
+        {
+            "colour": "b",
+            "rank": 3
+        },
+        {
+            "colour": "r",
+            "rank": 2
+        },
+        {
+            "colour": "b",
+            "rank": 1
         }
     ]}
 ]}
