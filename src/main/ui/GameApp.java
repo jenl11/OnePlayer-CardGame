@@ -14,6 +14,10 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
+/**
+ * Represents the game of King's Row as a GUI
+ */
 public class GameApp extends JFrame {
     private static final String JSON_STORE = "./data/game.json";
     public static final int WIDTH = 1400;
@@ -55,7 +59,7 @@ public class GameApp extends JFrame {
 
     private void initialDisplay() {
         setLayout(new BorderLayout());
-        setLayout(new GridLayout(3,1));
+        setLayout(new GridLayout(0,1));
         setSize(new Dimension(WIDTH,HEIGHT));
         titlePage();
         JButton play = new JButton("play");
@@ -111,6 +115,7 @@ public class GameApp extends JFrame {
         gameOptions.add(save);
         gameOptions.add(pass);
         add(gameOptions, BorderLayout.SOUTH);
+        gameOptions.setVisible(true);
     }
 
     private void initializeRedGui() {

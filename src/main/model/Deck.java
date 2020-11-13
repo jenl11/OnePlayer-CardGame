@@ -65,9 +65,10 @@ public class Deck implements Writable {
         return false;
     }
 
+    //MODIFIES: this
+    //EFFECT: removes all the cards in the deck
     public void removeAll() {
         deck.removeAll(deck);
-
     }
 
 

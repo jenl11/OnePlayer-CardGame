@@ -18,7 +18,7 @@ public class Card implements Writable {
     private int rank;
 
     //REQUIRES: c has to be "r" or "b" and r had to be within the range of [1,13]
-    //EFFECT: creates a card with the given colour and rank
+    //EFFECT: creates a card with the given colour and rank and assigns a imagin to that card
     public Card(String c, int r) {
         colour = c;
         rank = r;
@@ -46,33 +46,11 @@ public class Card implements Writable {
             if (rank == 1) {
                 image = new ImageIcon(System.getProperty("user.dir") + sep
                         + "image" + sep + "AC.png");
-            } else if (rank == 2) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "2C.png");
-            } else if (rank == 3) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "3C.png");
-            } else if (rank == 4) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "4C.png");
-            } else if (rank == 5) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "5C.png");
-            } else if (rank == 6) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "6C.png");
-            } else if (rank == 7) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "7C.png");
-            } else if (rank == 8) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "8C.png");
-            } else if (rank == 9) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "9C.png");
-            } else if (rank == 10) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "10C.png");
+            } else if (rank >= 2 && rank <= 10) {
+                for (int i = 2; i < 11; i++) {
+                    image = new ImageIcon(System.getProperty("user.dir") + sep
+                            + "image" + sep + rank + "C.png");
+                }
             } else if (rank == 11) {
                 image = new ImageIcon(System.getProperty("user.dir") + sep
                         + "image" + sep + "JC.png");
