@@ -24,43 +24,51 @@ public class Card implements Writable {
         rank = r;
         String sep = System.getProperty("file.separator");
         if (colour.equals("r")) {
-            if (rank == 1) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "AD.png");
-            } else if (rank >= 2 && rank <= 10) {
-                for (int i = 2; i < 11; i++) {
-                    image = new ImageIcon(System.getProperty("user.dir") + sep
-                            + "image" + sep + rank + "D.png");
-                }
-            } else if (rank == 11) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "JD.png");
-            } else if (rank == 12) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "QD.png");
-            } else if (rank == 13) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "KD.png");
-            }
+            redCardSetUp(sep, "AD.png", "D.png", "JD.png", "QD.png", "KD.png");
         } else if (colour.equals("b")) {
-            if (rank == 1) {
+            blackCardSetUp(sep, "AC.png", "C.png", "JC.png", "QC.png", "KC.png");
+        }
+    }
+
+    private void blackCardSetUp(String sep, String s, String s2, String s3, String s4, String s5) {
+        if (rank == 1) {
+            image = new ImageIcon(System.getProperty("user.dir") + sep
+                    + "image" + sep + s);
+        } else if (rank >= 2 && rank <= 10) {
+            for (int i = 2; i < 11; i++) {
                 image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "AC.png");
-            } else if (rank >= 2 && rank <= 10) {
-                for (int i = 2; i < 11; i++) {
-                    image = new ImageIcon(System.getProperty("user.dir") + sep
-                            + "image" + sep + rank + "C.png");
-                }
-            } else if (rank == 11) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "JC.png");
-            } else if (rank == 12) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "QC.png");
-            } else if (rank == 13) {
-                image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + "KC.png");
+                        + "image" + sep + rank + s2);
             }
+        } else if (rank == 11) {
+            image = new ImageIcon(System.getProperty("user.dir") + sep
+                    + "image" + sep + s3);
+        } else if (rank == 12) {
+            image = new ImageIcon(System.getProperty("user.dir") + sep
+                    + "image" + sep + s4);
+        } else if (rank == 13) {
+            image = new ImageIcon(System.getProperty("user.dir") + sep
+                    + "image" + sep + s5);
+        }
+    }
+
+    private void redCardSetUp(String sep, String s, String s2, String s3, String s4, String s5) {
+        if (rank == 1) {
+            image = new ImageIcon(System.getProperty("user.dir") + sep
+                    + "image" + sep + s);
+        } else if (rank >= 2 && rank <= 10) {
+            for (int i = 2; i < 11; i++) {
+                image = new ImageIcon(System.getProperty("user.dir") + sep
+                        + "image" + sep + rank + s2);
+            }
+        } else if (rank == 11) {
+            image = new ImageIcon(System.getProperty("user.dir") + sep
+                    + "image" + sep + s3);
+        } else if (rank == 12) {
+            image = new ImageIcon(System.getProperty("user.dir") + sep
+                    + "image" + sep + s4);
+        } else if (rank == 13) {
+            image = new ImageIcon(System.getProperty("user.dir") + sep
+                    + "image" + sep + s5);
         }
     }
 

@@ -8,6 +8,7 @@ import persistence.JsonWriter;
 
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,8 +21,8 @@ import java.io.IOException;
  */
 public class GameApp extends JFrame {
     private static final String JSON_STORE = "./data/game.json";
-    public static final int WIDTH = 1400;
-    public static final int HEIGHT = 700;
+    public static final int WIDTH = 1300;
+    public static final int HEIGHT = 800;
     JPanel buttons;
     JPanel gameOptions;
     JPanel handPanel;
@@ -41,8 +42,6 @@ public class GameApp extends JFrame {
 
     public GameApp() {
         super("King's Row");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(null);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         deck = new Deck(24);
@@ -53,15 +52,15 @@ public class GameApp extends JFrame {
         getRidOf = new Deck();
         red.addCard(new Card("r", 13));
         black.addCard(new Card("b", 13));
-        buttons = new JPanel();
         initialDisplay();
     }
 
     private void initialDisplay() {
-        setLayout(new BorderLayout());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new GridLayout(0,1));
         setSize(new Dimension(WIDTH,HEIGHT));
         titlePage();
+        buttons = new JPanel();
         JButton play = new JButton("play");
         play.addActionListener(new Menu());
         JButton quit = new JButton("quit");
@@ -71,13 +70,13 @@ public class GameApp extends JFrame {
         buttons.add(play);
         buttons.add(quit);
         buttons.add(load);
-        buttons.setLayout(new GridLayout(0,1));
         add(menuPage);
         add(rules);
-        add(buttons, BorderLayout.SOUTH);
+        add(buttons);
         setVisible(true);
     }
 
+    //Reference: https://stackoverflow.com/questions/6984099/how-to-fit-a-long-string-into-a-jlabel
     private void titlePage() {
         menuPage = new JLabel("Welcome to King's Row!");
         menuPage.setFont(new Font("Serif", Font.PLAIN, 45));
@@ -96,25 +95,26 @@ public class GameApp extends JFrame {
     }
 
     public void playing() {
-        setGameOptions();
         initializeHandGui();
         initializeRidGui();
         initializeBlackGui();
         initializeRedGui();
+        setGameOptions();
     }
 
     private void setGameOptions() {
         gameOptions = new JPanel();
+        gameOptions.setLayout(new GridLayout(0,1));
         JButton pass = new JButton("no cards to play");
         pass.addActionListener(new CardGame());
         JButton save = new JButton("save game");
         save.addActionListener(new Menu());
         JButton quitGame = new JButton("quit");
         quitGame.addActionListener(new Menu());
-        gameOptions.add(quitGame);
-        gameOptions.add(save);
         gameOptions.add(pass);
-        add(gameOptions, BorderLayout.SOUTH);
+        gameOptions.add(save);
+        gameOptions.add(quitGame);
+        add(gameOptions);
         gameOptions.setVisible(true);
     }
 
@@ -152,8 +152,6 @@ public class GameApp extends JFrame {
 
     private void initializeRidGui() {
         ridOfPanel = new JPanel();
-        JLabel labelRid = new JLabel("cards to get rid of");
-        ridOfPanel.add(labelRid);
         ridOfPanel.setBackground(Color.lightGray);
         add(ridOfPanel, SwingConstants.CENTER);
         ridOfPanel.setVisible(true);
@@ -211,6 +209,7 @@ public class GameApp extends JFrame {
         }
     }
 
+    //EFFECTS: loads the game using the decks stored in game.json file
     private void loadGame() {
         try {
             GameDecks decks = jsonReader.read();
@@ -231,6 +230,21 @@ public class GameApp extends JFrame {
             adding(e, "add to row 1", "1", redPanel);
             adding(e, "add to row 2", "1", blackPanel);
             noCardToPlay(e);
+            putBackToHand(e);
+        }
+
+        private void putBackToHand(ActionEvent e) {
+            for (int i = 0; i < getRidOf.getSize(); i++) {
+                if (e.getActionCommand().equals(getRidOf.getCard(i) + "?")) {
+                    JButton backToHand = new JButton(getRidOf.getCard(i).toString());
+                    handPanel.add(backToHand);
+                    ridOfPanel.remove(i);
+                    hand.addCard(getRidOf.getCard(i));
+                    getRidOf.removeCard(getRidOf.getCard(i));
+                    validate();
+                    repaint();
+                }
+            }
         }
 
         private void noCardToPlay(ActionEvent e) {
@@ -310,7 +324,8 @@ public class GameApp extends JFrame {
         private void handCardClick(ActionEvent e) {
             for (int i = 0; i < hand.getSize(); i++) {
                 if (e.getActionCommand().equals(hand.getCard(i).toString())) {
-                    JButton ridButton = new JButton(hand.getCard(i).toString());
+                    JButton ridButton = new JButton(hand.getCard(i).toString() + "?");
+                    ridButton.addActionListener(new CardGame());
                     ridOfPanel.add(ridButton);
                     handPanel.remove(i);
                     getRidOf.addCard(hand.getCard(i));
@@ -333,8 +348,10 @@ public class GameApp extends JFrame {
 
             if (e.getActionCommand().equals("play")) {
                 buttons.setVisible(false);
-                menuPage.setVisible(false);
-                rules.setVisible(false);
+                remove(menuPage);
+                remove(rules);
+                validate();
+                repaint();
                 playing();
             }
 
