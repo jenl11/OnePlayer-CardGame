@@ -8,7 +8,6 @@ import persistence.JsonWriter;
 
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -254,7 +253,7 @@ public class GameApp extends JFrame {
         public void actionPerformed(ActionEvent e) {
             handCardClick(e);
             adding(e, "add to row 1", "1", redPanel);
-            adding(e, "add to row 2", "1", blackPanel);
+            adding(e, "add to row 2", "2", blackPanel);
             noCardToPlay(e);
             putBackToHand(e);
         }
