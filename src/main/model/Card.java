@@ -5,7 +5,6 @@ import persistence.Writable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.file.Watchable;
 import java.util.Objects;
 
 /**
@@ -18,57 +17,59 @@ public class Card implements Writable {
     private int rank;
 
     //REQUIRES: c has to be "r" or "b" and r had to be within the range of [1,13]
-    //EFFECT: creates a card with the given colour and rank and assigns a imagin to that card
+    //EFFECT: creates a card with the given colour and rank and assigns an image to that card
     public Card(String c, int r) {
         colour = c;
         rank = r;
         String sep = System.getProperty("file.separator");
         if (colour.equals("r")) {
-            redCardSetUp(sep, "AD.png", "D.png", "JD.png", "QD.png", "KD.png");
+            redCardSetUp(sep);
         } else if (colour.equals("b")) {
-            blackCardSetUp(sep, "AC.png", "C.png", "JC.png", "QC.png", "KC.png");
+            blackCardSetUp(sep);
         }
     }
 
-    private void blackCardSetUp(String sep, String s, String s2, String s3, String s4, String s5) {
+    //EFFECT: helper method for assigning an image to this card if this card is a black card
+    private void blackCardSetUp(String sep) {
         if (rank == 1) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
-                    + "image" + sep + s);
+                    + "image" + sep + "AC.png", "AC.png");
         } else if (rank >= 2 && rank <= 10) {
             for (int i = 2; i < 11; i++) {
                 image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + rank + s2);
+                        + "image" + sep + rank + "C.png","C.png");
             }
         } else if (rank == 11) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
-                    + "image" + sep + s3);
+                    + "image" + sep + "JC.png","JC.png");
         } else if (rank == 12) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
-                    + "image" + sep + s4);
+                    + "image" + sep + "QC.png","QC.png");
         } else if (rank == 13) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
-                    + "image" + sep + s5);
+                    + "image" + sep + "KC.png","KC.png");
         }
     }
 
-    private void redCardSetUp(String sep, String s, String s2, String s3, String s4, String s5) {
+    //EFFECT: helper method for assigning an image to this card if this card is a red card
+    private void redCardSetUp(String sep) {
         if (rank == 1) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
-                    + "image" + sep + s);
+                    + "image" + sep + "AD.png","AD.png");
         } else if (rank >= 2 && rank <= 10) {
             for (int i = 2; i < 11; i++) {
                 image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + rank + s2);
+                        + "image" + sep + rank + "D.png","D.png");
             }
         } else if (rank == 11) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
-                    + "image" + sep + s3);
+                    + "image" + sep + "JD.png","JD.png");
         } else if (rank == 12) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
-                    + "image" + sep + s4);
+                    + "image" + sep + "QD.png","QD.png");
         } else if (rank == 13) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
-                    + "image" + sep + s5);
+                    + "image" + sep + "KD.png","KD.png");
         }
     }
 
@@ -85,10 +86,11 @@ public class Card implements Writable {
         return colour.equals(otherCard.getColour()) && rank == otherCard.getRank();
     }
 
+    //Reference to resizing the image: https://stackoverflow.com/questions/16343098/resize-a-picture-to-fit-a-jlabel/32885963#32885963
+    //EFFECT: returns an ImageIcon of the this card
     public ImageIcon getImage() {
         Image imageScaled = image.getImage().getScaledInstance(65, 100,Image.SCALE_DEFAULT);
-        ImageIcon newImage = new ImageIcon(imageScaled);
-        return newImage;
+        return new ImageIcon(imageScaled, image.getDescription());
     }
 
     @Override

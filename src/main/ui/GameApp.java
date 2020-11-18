@@ -18,6 +18,7 @@ import java.io.IOException;
 
 /**
  * Represents the game of King's Row as a GUI
+ * Reference for the usage of SwingConstants: https://www.tutorialspoint.com/how-can-we-add-multiple-sub-panels-to-the-main-panel-in-java
  */
 public class GameApp extends JFrame {
     private static final String JSON_STORE = "./data/game.json";
@@ -40,6 +41,7 @@ public class GameApp extends JFrame {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
+    //EFFECT: sets up the JFrame and all the decks in the game
     public GameApp() {
         super("King's Row");
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -55,6 +57,8 @@ public class GameApp extends JFrame {
         initialDisplay();
     }
 
+    //MODIFIES: this
+    //EFFECT: initializes the starting page of the game
     private void initialDisplay() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new GridLayout(0,1));
@@ -77,6 +81,7 @@ public class GameApp extends JFrame {
     }
 
     //Reference: https://stackoverflow.com/questions/6984099/how-to-fit-a-long-string-into-a-jlabel
+    //EFFECT: shows the title and rules for the starting page of the game
     private void titlePage() {
         menuPage = new JLabel("Welcome to King's Row!");
         menuPage.setFont(new Font("Serif", Font.PLAIN, 45));
@@ -94,6 +99,8 @@ public class GameApp extends JFrame {
         rules.setEditable(false);
     }
 
+    //MODIFIES: this
+    //EFFECT: initializes the gui of the actual game
     public void playing() {
         initializeHandGui();
         initializeRidGui();
@@ -102,6 +109,9 @@ public class GameApp extends JFrame {
         setGameOptions();
     }
 
+    //MODIFIES: this
+    //EFFECT: creates a panel with the buttons for the game page which allows the player
+    // to add more cards to their hand, quit the game, or save the game
     private void setGameOptions() {
         gameOptions = new JPanel();
         gameOptions.setLayout(new GridLayout(0,1));
@@ -118,6 +128,9 @@ public class GameApp extends JFrame {
         gameOptions.setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECT: creates the panel for "row 1" which is the row that starts off with the
+    // the red king and gives the player the button to add cards to it
     private void initializeRedGui() {
         redPanel = new JPanel();
         JLabel labelRed = new JLabel("ROW 1");
@@ -134,6 +147,9 @@ public class GameApp extends JFrame {
         redPanel.setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECT: creates the panel for "row 2" which is the row that starts off with the
+    // the black king and gives the player the button to add cards to it
     private void initializeBlackGui() {
         blackPanel = new JPanel();
         JLabel labelBlack = new JLabel("ROW 2");
@@ -150,6 +166,9 @@ public class GameApp extends JFrame {
         blackPanel.setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECT: creates the panel for the cards the player wants to get rid of so
+    //any card they select from their hand will go into this panel
     private void initializeRidGui() {
         ridOfPanel = new JPanel();
         ridOfPanel.setBackground(Color.lightGray);
@@ -157,6 +176,9 @@ public class GameApp extends JFrame {
         ridOfPanel.setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECT: creates the panel that consists of the buttons that represent the cards in
+    //the player's hand
     private void initializeHandGui() {
         handPanel = new JPanel();
         handPanel.setBackground(Color.pink);
@@ -170,6 +192,9 @@ public class GameApp extends JFrame {
         handPanel.setVisible(true);
     }
 
+    //EFFECT: if the deck is alternating in colour and is descending in rank
+    // when combined with the cards that are already in that row, it returns true
+    // otherwise returns false
     public boolean eligible(Deck d, String row) {
         if (row.equals("1")) {
             if (d.getSize() < 3) {
@@ -224,6 +249,7 @@ public class GameApp extends JFrame {
     }
 
     private class CardGame implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             handCardClick(e);
@@ -233,6 +259,8 @@ public class GameApp extends JFrame {
             putBackToHand(e);
         }
 
+        //MODIFIES: this
+        //EFFECT: if a button in the ridOfPanel is selected, it puts that card back to the players hand
         private void putBackToHand(ActionEvent e) {
             for (int i = 0; i < getRidOf.getSize(); i++) {
                 if (e.getActionCommand().equals(getRidOf.getCard(i) + "?")) {
@@ -247,6 +275,12 @@ public class GameApp extends JFrame {
             }
         }
 
+        //MODIFIES: this
+        //EFFECT: if the "no cards to play" is selected it adds three cards to
+        //the player's hand from the main deck and add the appropriate buttons to the player's hand,
+        //or if the main deck has less than three cards but is not empty, it adds the rest of the
+        //cards in the deck to the players and adds the appropriate buttons to the player's hand as well
+        //else it checks if the game is over
         private void noCardToPlay(ActionEvent e) {
             if (e.getActionCommand().equals("no cards to play")) {
                 if (deck.getSize() > 2) {
@@ -269,6 +303,7 @@ public class GameApp extends JFrame {
             }
         }
 
+        //EFFECT: helper method that adds all the cards in the current hand to the handPanel
         private void putHandToPanel() {
             for (int i = 0; i < hand.getSize(); i++) {
                 JButton handCard = new JButton(hand.getCard(i).toString());
@@ -277,6 +312,9 @@ public class GameApp extends JFrame {
             }
         }
 
+        //MODIFIES: this
+        //EFFECT: if the deck is empty and the player's hand still has cards left,
+        // it shows the player that the game is over
         private void gameOver() {
             if (deck.isEmpty() && !hand.isEmpty()) {
                 handPanel.setVisible(false);
@@ -289,9 +327,13 @@ public class GameApp extends JFrame {
             }
         }
 
-        private void adding(ActionEvent e, String s, String s2, JPanel panel) {
-            if (e.getActionCommand().equals(s)) {
-                if (eligible(getRidOf, s2)) {
+        //MODIFIES: this
+        //EFFECT: if the cards in getRidOf are eligible cards to the selected row,
+        //it is added to that row's panel and gets rid of the buttons in the ridOfPanel
+        //and it also checks if the player has won the game
+        private void adding(ActionEvent e, String buttonSelected, String rowNumber, JPanel panel) {
+            if (e.getActionCommand().equals(buttonSelected)) {
+                if (eligible(getRidOf, rowNumber)) {
                     for (int i = 0; i < getRidOf.getSize(); i++) {
                         JButton button = new JButton(getRidOf.getCard(i).getImage());
                         panel.add(button);
@@ -311,6 +353,9 @@ public class GameApp extends JFrame {
             }
         }
 
+        //MODIFIES: this
+        //EFFECT: if the player's hand if empty or the both the hand and the deck
+        //is empty, it show that the player had won the game
         private void winning() {
             if (hand.isEmpty() && deck.isEmpty() || hand.isEmpty()) {
                 handPanel.setVisible(false);
@@ -321,6 +366,9 @@ public class GameApp extends JFrame {
             }
         }
 
+        //MODIFIES: this
+        //EFFECT: if the cards in the hand is selected, that selected card gets moved to
+        // the RidOfPanel and is added to the getRidOf deck
         private void handCardClick(ActionEvent e) {
             for (int i = 0; i < hand.getSize(); i++) {
                 if (e.getActionCommand().equals(hand.getCard(i).toString())) {
@@ -340,6 +388,11 @@ public class GameApp extends JFrame {
 
     private class Menu implements ActionListener {
 
+        //MODIFIES: this
+        //EFFECT: if the quit button from the starting page is selected, the game stops running
+        // or if the play button is selected, it gets rid of the main starting page and starts the game
+        // or if the load and play is selected, it gets rid of the main starting page and starts the with
+        // the data that was saved previously
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("quit")) {

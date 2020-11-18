@@ -2,6 +2,8 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
+import javax.swing.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestCard {
@@ -12,6 +14,7 @@ public class TestCard {
 
         assertEquals("r", card1.getColour());
         assertEquals(1, card1.getRank());
+        assertEquals("AD.png",card1.getImage().getDescription());
     }
 
     @Test
@@ -67,5 +70,13 @@ public class TestCard {
 
         assertEquals(string, card1.toString());
     }
+
+    @Test
+    public void testImageIcon() {
+        Card card1 = new Card("r", 1);
+        Card card2 = new Card("r", 1);
+        assertEquals(card1.getImage().getDescription(), card2.getImage().getDescription());
+    }
+
 
 }
