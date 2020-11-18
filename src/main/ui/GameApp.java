@@ -6,7 +6,6 @@ import model.GameDecks;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
