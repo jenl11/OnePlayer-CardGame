@@ -52,6 +52,22 @@ public class TestCard {
         } catch (NullPointerException e) {
             //expected
         }
+
+        try {
+            Card cardNeg = new Card("r", -1);
+            cardNeg.getImage();
+            fail();
+        } catch (NullPointerException e) {
+            //expected
+        }
+
+        try {
+            Card cardZ = new Card("Z", 1);
+            cardZ.getImage();
+            fail();
+        } catch (NullPointerException e) {
+            //expected
+        }
     }
 
     @Test
@@ -87,6 +103,14 @@ public class TestCard {
         try {
             Card card14 = new Card("b", 14);
             card14.getImage();
+            fail();
+        } catch (NullPointerException e) {
+            //expected
+        }
+
+        try {
+            Card cardNeg = new Card("b", -1);
+            cardNeg.getImage();
             fail();
         } catch (NullPointerException e) {
             //expected
