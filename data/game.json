@@ -2,14 +2,84 @@
     {"cards": [
         {
             "colour": "r",
-            "rank": 1
+            "rank": 7
+        },
+        {
+            "colour": "r",
+            "rank": 2
+        }
+    ]},
+    {"cards": [
+        {
+            "colour": "b",
+            "rank": 9
+        },
+        {
+            "colour": "b",
+            "rank": 8
+        },
+        {
+            "colour": "b",
+            "rank": 7
+        },
+        {
+            "colour": "b",
+            "rank": 6
+        },
+        {
+            "colour": "r",
+            "rank": 6
+        },
+        {
+            "colour": "b",
+            "rank": 5
         },
         {
             "colour": "r",
             "rank": 5
+        },
+        {
+            "colour": "r",
+            "rank": 4
+        },
+        {
+            "colour": "b",
+            "rank": 4
+        },
+        {
+            "colour": "b",
+            "rank": 3
+        },
+        {
+            "colour": "r",
+            "rank": 3
+        },
+        {
+            "colour": "b",
+            "rank": 2
+        },
+        {
+            "colour": "b",
+            "rank": 1
+        },
+        {
+            "colour": "r",
+            "rank": 1
+        },
+        {
+            "colour": "r",
+            "rank": 8
+        },
+        {
+            "colour": "r",
+            "rank": 9
         }
     ]},
     {"cards": [
+        {
+            "colour": "r",
+            "rank": 13
+        },
         {
             "colour": "b",
             "rank": 12
@@ -21,40 +91,8 @@
         {
             "colour": "b",
             "rank": 10
-        },
-        {
-            "colour": "r",
-            "rank": 9
-        },
-        {
-            "colour": "b",
-            "rank": 8
-        },
-        {
-            "colour": "r",
-            "rank": 7
-        },
-        {
-            "colour": "b",
-            "rank": 6
-        },
-        {
-            "colour": "b",
-            "rank": 4
-        },
-        {
-            "colour": "r",
-            "rank": 3
-        },
-        {
-            "colour": "b",
-            "rank": 2
         }
     ]},
-    {"cards": [{
-        "colour": "r",
-        "rank": 13
-    }]},
     {"cards": [
         {
             "colour": "b",
@@ -71,42 +109,6 @@
         {
             "colour": "r",
             "rank": 10
-        },
-        {
-            "colour": "b",
-            "rank": 9
-        },
-        {
-            "colour": "r",
-            "rank": 8
-        },
-        {
-            "colour": "b",
-            "rank": 7
-        },
-        {
-            "colour": "r",
-            "rank": 6
-        },
-        {
-            "colour": "b",
-            "rank": 5
-        },
-        {
-            "colour": "r",
-            "rank": 4
-        },
-        {
-            "colour": "b",
-            "rank": 3
-        },
-        {
-            "colour": "r",
-            "rank": 2
-        },
-        {
-            "colour": "b",
-            "rank": 1
         }
     ]}
 ]}

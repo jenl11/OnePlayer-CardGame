@@ -37,7 +37,7 @@ public class Card implements Writable {
         } else if (rank >= 2 && rank <= 10) {
             for (int i = 2; i < 11; i++) {
                 image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + rank + "C.png","C.png");
+                        + "image" + sep + rank + "C.png",rank + "C.png");
             }
         } else if (rank == 11) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
@@ -59,7 +59,7 @@ public class Card implements Writable {
         } else if (rank >= 2 && rank <= 10) {
             for (int i = 2; i < 11; i++) {
                 image = new ImageIcon(System.getProperty("user.dir") + sep
-                        + "image" + sep + rank + "D.png","D.png");
+                        + "image" + sep + rank + "D.png",rank + "D.png");
             }
         } else if (rank == 11) {
             image = new ImageIcon(System.getProperty("user.dir") + sep

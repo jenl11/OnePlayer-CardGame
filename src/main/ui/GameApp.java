@@ -107,7 +107,7 @@ public class GameApp extends JFrame {
         setGameOptions();
     }
 
-    //MODIFIES: this
+    //MODIFIES: this, gameOptions
     //EFFECT: creates a panel with the buttons for the game page which allows the player
     // to add more cards to their hand, quit the game, or save the game
     private void setGameOptions() {
@@ -126,7 +126,7 @@ public class GameApp extends JFrame {
         gameOptions.setVisible(true);
     }
 
-    //MODIFIES: this
+    //MODIFIES: this, redPanel
     //EFFECT: creates the panel for "row 1" which is the row that starts off with the
     // the red king and gives the player the button to add cards to it
     private void initializeRedGui() {
@@ -145,7 +145,7 @@ public class GameApp extends JFrame {
         redPanel.setVisible(true);
     }
 
-    //MODIFIES: this
+    //MODIFIES: this, blackPanel
     //EFFECT: creates the panel for "row 2" which is the row that starts off with the
     // the black king and gives the player the button to add cards to it
     private void initializeBlackGui() {
@@ -164,7 +164,7 @@ public class GameApp extends JFrame {
         blackPanel.setVisible(true);
     }
 
-    //MODIFIES: this
+    //MODIFIES: this, ridOfPanel
     //EFFECT: creates the panel for the cards the player wants to get rid of so
     //any card they select from their hand will go into this panel
     private void initializeRidGui() {
@@ -174,7 +174,7 @@ public class GameApp extends JFrame {
         ridOfPanel.setVisible(true);
     }
 
-    //MODIFIES: this
+    //MODIFIES: this, handPanel
     //EFFECT: creates the panel that consists of the buttons that represent the cards in
     //the player's hand
     private void initializeHandGui() {
@@ -296,8 +296,9 @@ public class GameApp extends JFrame {
                     putHandToPanel();
                     validate();
                     repaint();
+                } else if (deck.isEmpty() && !hand.isEmpty()) {
+                    gameOver();
                 }
-                gameOver();
             }
         }
 
@@ -314,15 +315,13 @@ public class GameApp extends JFrame {
         //EFFECT: if the deck is empty and the player's hand still has cards left,
         // it shows the player that the game is over
         private void gameOver() {
-            if (deck.isEmpty() && !hand.isEmpty()) {
-                handPanel.setVisible(false);
-                redPanel.setVisible(false);
-                blackPanel.setVisible(false);
-                ridOfPanel.setVisible(false);
-                gameOptions.setVisible(false);
-                gameStatus = new JLabel("Game over :(");
-                add(gameStatus);
-            }
+            handPanel.setVisible(false);
+            redPanel.setVisible(false);
+            blackPanel.setVisible(false);
+            ridOfPanel.setVisible(false);
+            gameOptions.setVisible(false);
+            gameStatus = new JLabel("Game over :(");
+            add(gameStatus);
         }
 
         //MODIFIES: this
