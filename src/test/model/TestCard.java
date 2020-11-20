@@ -44,6 +44,14 @@ public class TestCard {
         assertEquals("JD.png",card11.getImage().getDescription());
         assertEquals("QD.png",card12.getImage().getDescription());
         assertEquals("KD.png",card13.getImage().getDescription());
+
+        try {
+            Card card14 = new Card("r", 14);
+            card14.getImage();
+            fail();
+        } catch (NullPointerException e) {
+            //expected
+        }
     }
 
     @Test
@@ -75,6 +83,14 @@ public class TestCard {
         assertEquals("JC.png",card11.getImage().getDescription());
         assertEquals("QC.png",card12.getImage().getDescription());
         assertEquals("KC.png",card13.getImage().getDescription());
+
+        try {
+            Card card14 = new Card("b", 14);
+            card14.getImage();
+            fail();
+        } catch (NullPointerException e) {
+            //expected
+        }
     }
 
     @Test
