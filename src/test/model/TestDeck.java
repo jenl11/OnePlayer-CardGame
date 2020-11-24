@@ -18,7 +18,7 @@ class TestDeck {
     private Deck deckWithCards;
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws Exception {
         deck = new Deck();
         deckWithCards = new Deck(24);
     }

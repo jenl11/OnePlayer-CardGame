@@ -13,6 +13,5 @@ public class Main {
         System.out.println(rules);
         Game game = new Game();
         game.play();
-
     }
 }

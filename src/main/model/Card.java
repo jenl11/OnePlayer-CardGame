@@ -16,16 +16,23 @@ public class Card implements Writable {
     private String colour;
     private int rank;
 
-    //REQUIRES: c has to be "r" or "b" and r had to be within the range of [1,13]
     //EFFECT: creates a card with the given colour and rank and assigns an image to that card
-    public Card(String c, int r) {
-        colour = c;
-        rank = r;
-        String sep = System.getProperty("file.separator");
-        if (colour.equals("r")) {
-            redCardSetUp(sep);
-        } else if (colour.equals("b")) {
-            blackCardSetUp(sep);
+    public Card(String c, int r) throws IllegalArgumentException, IndexOutOfBoundsException {
+        if (c.equals("r") || c.equals("b")) {
+            if (r <= 13 && r >= 1) {
+                colour = c;
+                rank = r;
+                String sep = System.getProperty("file.separator");
+                if (colour.equals("r")) {
+                    redCardSetUp(sep);
+                } else if (colour.equals("b")) {
+                    blackCardSetUp(sep);
+                }
+            } else {
+                throw new IndexOutOfBoundsException("card rank is out of bounds");
+            }
+        } else {
+            throw new IllegalArgumentException("card colour is neither red or black");
         }
     }
 

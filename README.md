@@ -34,3 +34,14 @@ Data persistence:
 - as a user, I want to be able to save the state of my game to a file
 - as a user, I want to be able to load a saved game from file and continue playing from that saved game
 - as a user, I want the option to load the saved game before the game starts
+
+## Phase 4: Task 2
+
+For task 2, I have chosen the option to test and design a class in my model package that is robust. I choose that class 
+to be the Card class in which the constructor throws checked exceptions, IllegalArgumentException() and 
+IndexOutOfBoundsException(), if a card is constructed with a colour other than red or black or if the rank of the card
+a negative number or bigger than 13.
+
+## Phase 4: Task 3
+
+
