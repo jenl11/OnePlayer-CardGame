@@ -137,7 +137,6 @@ public class TestCard {
     public void testSameCard() {
         Card card1 = new Card("r", 1);
         Card card2 = new Card("r", 1);
-
         assertTrue(card1.sameCard(card2));
     }
 
@@ -145,7 +144,6 @@ public class TestCard {
     public void testNotSameCard() {
         Card card1 = new Card("r", 1);
         Card card2 = new Card("b", 3);
-
         assertFalse(card1.sameCard(card2));
     }
 
