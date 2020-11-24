@@ -25,7 +25,7 @@ public class Card implements Writable {
                 String sep = System.getProperty("file.separator");
                 if (colour.equals("r")) {
                     redCardSetUp(sep);
-                } else if (colour.equals("b")) {
+                } else {
                     blackCardSetUp(sep);
                 }
             } else {
