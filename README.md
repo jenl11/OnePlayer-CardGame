@@ -43,5 +43,12 @@ IndexOutOfBoundsException(), if a card is constructed with a colour other than r
 a negative number or bigger than 13.
 
 ## Phase 4: Task 3
+If I had more time to improve the design of my project, I think I would mainly focus on the GUI class. The model classes
+I think are pretty simple and basic to work with, however, I think because I haven't worked with GUI's before, I didn't know 
+what would be a good approach to organize it and it just ended up all in one class. I think that this can cause a lot of 
+confusion due to there being so much code in one class, and it also is not very organized. So, next time I would like 
+to organize my GUI with multiple classes that are in charge of maybe each of the panels I have on the game board. 
+Since in my GUI there are a total of 5 panels when playing the game, I could make each of those panels a separate class 
+so that I can easily find my way through and work on each panel separately without having a clutter of code around it. 
 
 
