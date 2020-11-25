@@ -41,7 +41,7 @@ public class Card implements Writable {
         if (rank == 1) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
                     + "image" + sep + "AC.png", "AC.png");
-        } else if (rank >= 2 && rank <= 10) {
+        } else if (rank <= 10) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
                     + "image" + sep + rank + "C.png",rank + "C.png");
         } else if (rank == 11) {
@@ -50,7 +50,7 @@ public class Card implements Writable {
         } else if (rank == 12) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
                     + "image" + sep + "QC.png","QC.png");
-        } else if (rank == 13) {
+        } else {
             image = new ImageIcon(System.getProperty("user.dir") + sep
                     + "image" + sep + "KC.png","KC.png");
         }
@@ -61,7 +61,7 @@ public class Card implements Writable {
         if (rank == 1) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
                     + "image" + sep + "AD.png","AD.png");
-        } else if (rank >= 2 && rank <= 10) {
+        } else if (rank <= 10) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
                     + "image" + sep + rank + "D.png",rank + "D.png");
         } else if (rank == 11) {
@@ -70,7 +70,7 @@ public class Card implements Writable {
         } else if (rank == 12) {
             image = new ImageIcon(System.getProperty("user.dir") + sep
                     + "image" + sep + "QD.png","QD.png");
-        } else if (rank == 13) {
+        } else {
             image = new ImageIcon(System.getProperty("user.dir") + sep
                     + "image" + sep + "KD.png","KD.png");
         }
