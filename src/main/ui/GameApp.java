@@ -22,6 +22,10 @@ public class GameApp extends JFrame {
     private static final String JSON_STORE = "./data/game.json";
     public static final int WIDTH = 1300;
     public static final int HEIGHT = 800;
+    private static final String BLACK = "b";
+    private static final String RED = "r";
+    private static final int KING = 13;
+    private static final int ACE = 1;
     JPanel buttons;
     JPanel gameOptions;
     JPanel handPanel;
@@ -44,15 +48,39 @@ public class GameApp extends JFrame {
         super("King's Row");
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        deck = new Deck(24);
+        initializeDeck();
         deck.shuffle();
         hand = deck.dealHand();
         red = new Deck();
         black = new Deck();
         getRidOf = new Deck();
-        red.addCard(new Card("r", 13));
-        black.addCard(new Card("b", 13));
+        try {
+            black.addCard(new Card("b", 13));
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+            black.addCard(new Card(BLACK, KING));
+        }
+        try {
+            red.addCard(new Card("r", 13));
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+            red.addCard(new Card(RED, KING));
+        }
         initialDisplay();
+    }
+
+    private void initializeDeck() {
+        deck = new Deck();
+        try {
+            deck = new Deck(24);
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+            for (int i = ACE; i < KING; i++) {
+                if (!deck.containsCard(new Card(RED, i))) {
+                    deck.addCard(new Card(RED, i));
+                }
+                if (!deck.containsCard(new Card(BLACK, i))) {
+                    deck.addCard(new Card(BLACK, i));
+                }
+            }
+        }
     }
 
     //MODIFIES: this
