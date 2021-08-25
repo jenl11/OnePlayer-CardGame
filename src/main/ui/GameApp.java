@@ -67,6 +67,7 @@ public class GameApp extends JFrame {
         initialDisplay();
     }
 
+    //EFFECT: helper method for the try and catch block when the main deck is made
     private void initializeDeck() {
         deck = new Deck();
         try {
