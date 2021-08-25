@@ -3,7 +3,7 @@
 
 ## Details of the Project
 
-For my personal project I will be building a one player card game.
+For my personal project I built a one player card game.
 
 **Rules:** This game will have the player get rid of all the
 cards in their hand by disposing 2 or more cards in alternating colour and consecutive order. If the player isn't able
