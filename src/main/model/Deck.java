@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+
 /**
  * Represents a list that consist of cards
  */

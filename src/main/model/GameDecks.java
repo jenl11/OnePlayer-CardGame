@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
  * Represents a list that contains all the four decks involved in the game
  * which are the decks: deck, hand, startWithRed, startWithBlack
